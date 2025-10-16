@@ -1,6 +1,11 @@
-# kimi-fallback Zsh Plugin
+# kimi-cli Zsh Plugin
 
-`kimi-fallback` is a lightweight Zsh plugin that forwards unknown commands to the Kimi CLI. When a command is not found, the plugin formats the original invocation and runs `kimi -c "<command …>"`. If `kimi` is absent, control falls back to any previously defined `command_not_found_handler`.
+`kimi-cli` Zsh plugin is a Zsh plugin that integrate Kimi CLI into Zsh.
+
+## Usage
+
+- Press `Ctrl-K` in Zsh to start talking to Kimi CLI.
+- Press `Ctrl-K` again to exit the conversation mode.
 
 ## Requirements
 
@@ -15,10 +20,10 @@ Pick the method that matches your Zsh setup.
 
 ```zsh
 # clone anywhere you prefer
-git clone https://github.com/stdrc/zsh-kimi-fallback.git ~/.zsh/kimi-fallback
+git clone https://github.com/stdrc/zsh-kimi-cli.git ~/.zsh/kimi-cli
 
 # load the plugin in .zshrc
-source ~/.zsh/kimi-fallback/kimi-fallback.plugin.zsh
+source ~/.zsh/kimi-cli/kimi-cli.plugin.zsh
 ```
 
 Open a new shell (or `exec zsh`) to activate the handler.
@@ -26,11 +31,11 @@ Open a new shell (or `exec zsh`) to activate the handler.
 ### Oh My Zsh
 
 ```zsh
-git clone https://github.com/stdrc/zsh-kimi-fallback.git \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/kimi-fallback
+git clone https://github.com/stdrc/zsh-kimi-cli.git \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/kimi-cli
 
 # in ~/.zshrc
-plugins=(... kimi-fallback)
+plugins=(... kimi-cli)
 ```
 
 Reload Zsh to pick up the plugin.
@@ -38,24 +43,24 @@ Reload Zsh to pick up the plugin.
 ### Antigen
 
 ```zsh
-antigen bundle stdrc/zsh-kimi-fallback
+antigen bundle stdrc/zsh-kimi-cli
 antigen apply
 ```
 
 ### Zinit
 
 ```zsh
-zinit light stdrc/zsh-kimi-fallback
+zinit light stdrc/zsh-kimi-cli
 ```
 
 ### Znap
 
 ```zsh
-znap source stdrc/zsh-kimi-fallback
+znap source stdrc/zsh-kimi-cli
 ```
 
 ### Fig
 
 ```zsh
-fig plugin install stdrc/zsh-kimi-fallback
+fig plugin install stdrc/zsh-kimi-cli
 ```
