@@ -9,6 +9,7 @@ typeset -g __KIMI_CLI_PREFIX
 
 typeset -g __KIMI_CLI_PREFIX_ACTIVE=0
 typeset -g __KIMI_CLI_WIDGETS_INSTALLED=0
+typeset -g __KIMI_CLI_HAS_PREV_LINE_INIT=0
 typeset -g __KIMI_CLI_HAS_PREV_LINE_PRE_REDRAW=0
 typeset -g __KIMI_CLI_HAS_PREV_LINE_FINISH=0
 typeset -gA __KIMI_CLI_GUARD_WIDGET_ALIASES=()
@@ -59,6 +60,7 @@ command_not_found_handler() {
       __kimi_cli_original_command_not_found_handler "${cmd_with_args[@]}"
       return $?
     fi
+    print -u2 "zsh: command not found: ${missing_command}"
     return 127
   fi
 
@@ -105,17 +107,27 @@ __kimi_cli_toggle_prefix() {
   fi
 }
 
+__kimi_cli_line_init() {
+  emulate -L zsh
+
+  # Add prefix at the start of a new line if prefix mode is active
+  if (( __KIMI_CLI_PREFIX_ACTIVE )); then
+    local prefix="${__KIMI_CLI_PREFIX:-${__KIMI_CLI_PREFIX_CHAR} }"
+    BUFFER="${prefix}"
+    CURSOR=${#prefix}
+  fi
+
+  if (( __KIMI_CLI_HAS_PREV_LINE_INIT )); then
+    zle __kimi_cli_prev_line_init
+  fi
+}
+
 __kimi_cli_line_pre_redraw() {
   emulate -L zsh
 
   if (( __KIMI_CLI_PREFIX_ACTIVE )); then
     local prefix="${__KIMI_CLI_PREFIX:-${__KIMI_CLI_PREFIX_CHAR} }"
     local prefix_len=${#prefix}
-
-    if [[ "$BUFFER" != "$prefix"* ]]; then
-      BUFFER="${prefix}${BUFFER}"
-      CURSOR=$(( CURSOR + prefix_len ))
-    fi
 
     if (( CURSOR < prefix_len )); then
       CURSOR=$prefix_len
@@ -134,8 +146,6 @@ __kimi_cli_line_pre_redraw() {
 
 __kimi_cli_line_finish() {
   emulate -L zsh
-
-  __KIMI_CLI_PREFIX_ACTIVE=0
 
   if (( __KIMI_CLI_HAS_PREV_LINE_FINISH )); then
     zle __kimi_cli_prev_line_finish
@@ -198,6 +208,11 @@ if [[ -o interactive ]]; then
   unset keymap __kimi_cli_keymaps
 
   if (( ! __KIMI_CLI_WIDGETS_INSTALLED )); then
+    if zle -A zle-line-init __kimi_cli_prev_line_init 2>/dev/null; then
+      __KIMI_CLI_HAS_PREV_LINE_INIT=1
+    fi
+    zle -N zle-line-init __kimi_cli_line_init
+
     if zle -A zle-line-pre-redraw __kimi_cli_prev_line_pre_redraw 2>/dev/null; then
       __KIMI_CLI_HAS_PREV_LINE_PRE_REDRAW=1
     fi
