@@ -20,7 +20,7 @@ Pick the method that matches your Zsh setup.
 
 ```zsh
 # clone anywhere you prefer
-git clone https://github.com/stdrc/zsh-kimi-cli.git ~/.zsh/kimi-cli
+git clone https://github.com/MoonshotAI/zsh-kimi-cli.git ~/.zsh/kimi-cli
 
 # load the plugin in .zshrc
 source ~/.zsh/kimi-cli/kimi-cli.plugin.zsh
@@ -31,7 +31,7 @@ Open a new shell (or `exec zsh`) to activate the handler.
 ### Oh My Zsh
 
 ```zsh
-git clone https://github.com/stdrc/zsh-kimi-cli.git \
+git clone https://github.com/MoonshotAI/zsh-kimi-cli.git \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/kimi-cli
 
 # in ~/.zshrc
@@ -43,24 +43,24 @@ Reload Zsh to pick up the plugin.
 ### Antigen
 
 ```zsh
-antigen bundle stdrc/zsh-kimi-cli
+antigen bundle MoonshotAI/zsh-kimi-cli
 antigen apply
 ```
 
 ### Zinit
 
 ```zsh
-zinit light stdrc/zsh-kimi-cli
+zinit light MoonshotAI/zsh-kimi-cli
 ```
 
 ### Znap
 
 ```zsh
-znap source stdrc/zsh-kimi-cli
+znap source MoonshotAI/zsh-kimi-cli
 ```
 
 ### Fig
 
 ```zsh
-fig plugin install stdrc/zsh-kimi-cli
+fig plugin install MoonshotAI/zsh-kimi-cli
 ```
