@@ -5,7 +5,7 @@
 ## Usage
 
 - Press `Ctrl-K` in Zsh to start talking to Kimi CLI.
-- Press `Ctrl-K` again to exit the conversation mode.
+- Press `Ctrl-K` again to exit Kimi CLI mode.
 
 ## Requirements
 
