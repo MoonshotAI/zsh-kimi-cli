@@ -64,3 +64,9 @@ znap source MoonshotAI/zsh-kimi-cli
 ```zsh
 fig plugin install MoonshotAI/zsh-kimi-cli
 ```
+
+### Zplug
+
+```zsh
+zplug "MoonshotAI/zsh-kimi-cli", as:plugin
+```
