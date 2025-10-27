@@ -203,7 +203,7 @@ if [[ -o interactive ]]; then
   local -a __kimi_cli_keymaps=("emacs" "viins")
   local keymap
   for keymap in "${__kimi_cli_keymaps[@]}"; do
-    bindkey -M "$keymap" '^K' __kimi_cli_toggle_prefix 2>/dev/null
+    bindkey -M "$keymap" '^X' __kimi_cli_toggle_prefix 2>/dev/null
   done
   unset keymap __kimi_cli_keymaps
 
