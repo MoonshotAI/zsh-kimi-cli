@@ -70,3 +70,18 @@ fig plugin install MoonshotAI/zsh-kimi-cli
 ```zsh
 zplug "MoonshotAI/zsh-kimi-cli", as:plugin
 ```
+
+### Sheldon
+
+```toml
+shell = "zsh"
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+...
+
+[plugins.zsh-kimi-cli]
+github = "MoonshotAI/zsh-kimi-cli"
+apply = ["defer"]
+```
